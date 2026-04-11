@@ -39,7 +39,7 @@ ThemeData lightMode = ThemeData(
     surface: Colors.white,
     primaryContainer: Colors.grey.shade300,
     secondaryContainer: Colors.grey.shade600,
-    primary: Colors.green.shade100,
+    primary: Colors.purple.shade100,
     inversePrimary: Colors.purple.shade400,
     inverseSurface: Colors.black,
     
@@ -50,10 +50,11 @@ ThemeData lightMode = ThemeData(
 ThemeData darkMode = ThemeData(
   colorScheme: ColorScheme.dark(
     surface: Colors.grey.shade900,
-    primary: const Color.fromARGB(255, 17, 74, 20),
+    primary: const Color.fromARGB(255, 91, 0, 176),
     primaryContainer: Colors.grey.shade800,
-    secondaryContainer: Colors.grey.shade500,
-    inversePrimary: const Color.fromARGB(255, 121, 215, 125),
+    secondaryContainer: const Color.fromARGB(255, 118, 118, 118),
+    tertiaryContainer: const Color.fromARGB(255, 106, 106, 106),
+    inversePrimary: const Color.fromARGB(255, 194, 163, 236),
     inverseSurface: Colors.white,
     
     
@@ -61,17 +62,9 @@ ThemeData darkMode = ThemeData(
   textTheme: textTheme,
 );
 
-ThemeData iconColorsDark = ThemeData(
-  colorScheme: ColorScheme.dark(
-    primary: Colors.purple.shade300,
-    secondary: Colors.blue.shade400,
-  )
-);
-
-
 
 class ThemeProvider with ChangeNotifier{
-  ThemeData _themeData = lightMode;
+  ThemeData _themeData = darkMode;
 
   ThemeData get themeData => _themeData;
   bool get isDarkMode => _themeData == darkMode;

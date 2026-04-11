@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:just_tooltip/just_tooltip.dart';
+import 'package:tachylyte/pages/notes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,23 +10,71 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
-        body: const Row(          
+        body: ListView(
+          scrollDirection: Axis.horizontal,
           children: [
-            Column(
-              children: [Text("foo")],
-            )
+            Container(
+                width: 45,
+                color: Theme.of(context).colorScheme.primaryContainer,
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 6.5),
+                  children: [
+                    const SizedBox(height: 15),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _selectedIndex = 0;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor:
+                            _selectedIndex == 0 ? Theme.of(context).colorScheme.tertiaryContainer : Theme.of(context).colorScheme.primaryContainer,
+                        iconSize: 20,
+                        padding: const EdgeInsets.symmetric(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(8)),
+                      ),
+                      child: JustTooltip(
+                          message: "Notes",
+                          direction: TooltipDirection.right,
+                          child: Icon(
+                            Icons.note,
+                            color: Theme.of(context).colorScheme.inverseSurface,
+                          )),
+                    ),
+                    const SizedBox(height: 15),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _selectedIndex = 1;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        overlayColor: Theme.of(context).colorScheme.inversePrimary,
+                        backgroundColor:
+                            _selectedIndex == 1 ? Theme.of(context).colorScheme.tertiaryContainer : Theme.of(context).colorScheme.primaryContainer,
+                        iconSize: 20,
+                        padding: const EdgeInsets.symmetric(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(8)),
+                      ),
+                      child: JustTooltip(
+                          message: "Settings",
+                          direction: TooltipDirection.right,
+                          child: Icon(
+                            Icons.settings,
+                            color: Theme.of(context).colorScheme.inverseSurface,
+                          )),
+                    )
+                  ],
+                )),
+            const NotesPage()
           ],
         ));
   }
