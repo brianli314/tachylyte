@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
-      home: const HomePage(),
+      home: const HomePage(vaultPath: "C:/Users/brian/OneDrive/Documents/Tachylyte"),
     );
   }
 }

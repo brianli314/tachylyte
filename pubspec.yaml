@@ -38,6 +38,8 @@ dependencies:
   google_fonts: ^8.0.2
   provider: ^6.1.5+1
   just_tooltip: ^0.2.5
+  file_tree_view: ^0.0.7
+  flutter_resizable_container: ^4.2.0
 
 dev_dependencies:
   flutter_test:

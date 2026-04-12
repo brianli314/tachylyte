@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:just_tooltip/just_tooltip.dart';
+import 'package:tachylyte/components/sidebar_button.dart';
 import 'package:tachylyte/pages/notes.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String vaultPath;
+  const HomePage({
+    super.key, 
+    required this.vaultPath 
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -14,8 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-          scrollDirection: Axis.horizontal,
+        body: Row(
           children: [
             Container(
                 width: 45,
@@ -24,28 +28,14 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 6.5),
                   children: [
                     const SizedBox(height: 15),
-                    ElevatedButton(
+                    SidebarButton(
                       onPressed: () {
                         setState(() {
-                          _selectedIndex = 0;
+                          _selectedIndex = 1;
                         });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor:
-                            _selectedIndex == 0 ? Theme.of(context).colorScheme.tertiaryContainer : Theme.of(context).colorScheme.primaryContainer,
-                        iconSize: 20,
-                        padding: const EdgeInsets.symmetric(),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusGeometry.circular(8)),
-                      ),
-                      child: JustTooltip(
-                          message: "Notes",
-                          direction: TooltipDirection.right,
-                          child: Icon(
-                            Icons.note,
-                            color: Theme.of(context).colorScheme.inverseSurface,
-                          )),
+                      }, 
+                      index: 0, 
+                      selectedIndex: _selectedIndex
                     ),
                     const SizedBox(height: 15),
                     ElevatedButton(
@@ -74,7 +64,8 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 )),
-            const NotesPage()
+            const SizedBox(width: 2,),
+            NotesPage(vaultPath: widget.vaultPath)
           ],
         ));
   }
