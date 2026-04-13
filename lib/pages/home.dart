@@ -5,10 +5,7 @@ import 'package:tachylyte/pages/notes.dart';
 
 class HomePage extends StatefulWidget {
   final String vaultPath;
-  const HomePage({
-    super.key, 
-    required this.vaultPath 
-  });
+  const HomePage({super.key, required this.vaultPath});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,53 +17,51 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Row(
-          children: [
-            Container(
-                width: 45,
-                color: Theme.of(context).colorScheme.primaryContainer,
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 6.5),
-                  children: [
-                    const SizedBox(height: 15),
-                    SidebarButton(
-                      onPressed: () {
-                        setState(() {
-                          _selectedIndex = 1;
-                        });
-                      }, 
-                      index: 0, 
-                      selectedIndex: _selectedIndex
-                    ),
-                    const SizedBox(height: 15),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _selectedIndex = 1;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        overlayColor: Theme.of(context).colorScheme.inversePrimary,
-                        backgroundColor:
-                            _selectedIndex == 1 ? Theme.of(context).colorScheme.tertiaryContainer : Theme.of(context).colorScheme.primaryContainer,
-                        iconSize: 20,
-                        padding: const EdgeInsets.symmetric(),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusGeometry.circular(8)),
-                      ),
-                      child: JustTooltip(
-                          message: "Settings",
-                          direction: TooltipDirection.right,
-                          child: Icon(
-                            Icons.settings,
-                            color: Theme.of(context).colorScheme.inverseSurface,
-                          )),
-                    )
-                  ],
-                )),
-            const SizedBox(width: 2,),
-            NotesPage(vaultPath: widget.vaultPath)
-          ],
-        ));
+      children: [
+        Container(
+            width: 45,
+            color: Theme.of(context).colorScheme.primaryContainer,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 6.5),
+              children: [
+                const SizedBox(height: 15),
+                SidebarButton(
+                    onPressed: () {
+                      setState(() {
+                        _selectedIndex = 0;
+                      });
+                    },
+                    note: "Notes",
+                    backgroundColor: _selectedIndex == 0
+                        ? Theme.of(context).colorScheme.tertiaryContainer
+                        : Theme.of(context).colorScheme.primaryContainer,
+                    icon: Icon(
+                      Icons.edit_note_outlined,
+                      color: Theme.of(context).colorScheme.inverseSurface,
+                    )),
+                const SizedBox(height: 15),
+                SidebarButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedIndex = 1;
+                    });
+                  },
+                  backgroundColor: _selectedIndex == 1
+                      ? Theme.of(context).colorScheme.tertiaryContainer
+                      : Theme.of(context).colorScheme.primaryContainer,
+                  icon: Icon(
+                    Icons.settings,
+                    color: Theme.of(context).colorScheme.inverseSurface,
+                  ),
+                  note: "Settings",
+                ),
+              ],
+            )),
+        const SizedBox(
+          width: 3,
+        ),
+        NotesPage(vaultPath: widget.vaultPath)
+      ],
+    ));
   }
 }

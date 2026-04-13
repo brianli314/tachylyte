@@ -3,13 +3,17 @@ import 'package:just_tooltip/just_tooltip.dart';
 
 class SidebarButton extends StatelessWidget {
   final Function()? onPressed;
-  final int index;
-  final int selectedIndex;
-  const SidebarButton(
-      {super.key,
-      required this.onPressed,
-      required this.index,
-      required this.selectedIndex});
+  final Color backgroundColor;
+  final String? note;
+  final Widget icon;
+
+  const SidebarButton({
+    super.key,
+    required this.onPressed,
+    required this.backgroundColor,
+    this.note,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,20 +21,16 @@ class SidebarButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           elevation: 0,
-          backgroundColor: selectedIndex == index
-              ? Theme.of(context).colorScheme.tertiaryContainer
-              : Theme.of(context).colorScheme.primaryContainer,
+          backgroundColor: backgroundColor,
           iconSize: 20,
           padding: const EdgeInsets.symmetric(),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadiusGeometry.circular(8)),
         ),
         child: JustTooltip(
-            message: "Notes",
+            message: note,
             direction: TooltipDirection.right,
-            child: Icon(
-              Icons.note,
-              color: Theme.of(context).colorScheme.inverseSurface,
-            )));
+            child: icon,
+            ));
   }
 }
