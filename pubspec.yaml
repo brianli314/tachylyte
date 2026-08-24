@@ -40,6 +40,7 @@ dependencies:
   just_tooltip: ^0.2.5
   file_tree_view: ^0.0.7
   flutter_resizable_container: ^4.2.0
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:

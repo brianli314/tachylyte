@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                       ? Theme.of(context).colorScheme.tertiaryContainer
                       : Theme.of(context).colorScheme.primaryContainer,
                   icon: Icon(
-                    Icons.settings,
+                    Icons.settings_outlined,
                     color: Theme.of(context).colorScheme.inverseSurface,
                   ),
                   note: "Settings",

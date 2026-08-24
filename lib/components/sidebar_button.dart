@@ -22,15 +22,18 @@ class SidebarButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: backgroundColor,
-          iconSize: 20,
+          iconSize: 22,
           padding: const EdgeInsets.symmetric(),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadiusGeometry.circular(8)),
         ),
         child: JustTooltip(
-            message: note,
-            direction: TooltipDirection.right,
-            child: icon,
-            ));
+          message: note,
+          theme: JustTooltipTheme(
+              textStyle: Theme.of(context).textTheme.labelMedium,
+              backgroundColor: Theme.of(context).colorScheme.surface),
+          direction: TooltipDirection.right,
+          child: icon,
+        ));
   }
 }

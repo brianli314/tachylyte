@@ -1,23 +1,59 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
 
-class FileExplorer extends StatefulWidget {
-  const FileExplorer({super.key});
+import 'package:flutter/material.dart';
+import 'package:path/path.dart' as p;
 
-  @override
-  State<FileExplorer> createState() => _FileExplorerState();
-}
+class FileExplorer extends StatelessWidget {
+  final String vaultPath;
 
-class _FileExplorerState extends State<FileExplorer> {
-  
+  const FileExplorer({
+    super.key,
+    required this.vaultPath,
+  });
 
-  getDirFiles(Directory dir){
-    await for (var entity in dir.list()){
-      
+  List<Widget> _buildNodes(Directory dir) {
+    final children = <Widget>[];
+
+    for (final entity in dir.listSync()) {
+      final name = p.basename(entity.path);
+
+      if (entity is File && p.extension(name) == '.md') {
+        children.add(
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.note_outlined),
+            title: Text(name),
+            dense: true,
+          ),
+        );
+      } else if (entity is Directory) {
+        children.add(
+          Theme(
+            data: ThemeData().copyWith(dividerColor: Colors.transparent),
+            child: ExpansionTile(
+              tilePadding: EdgeInsets.zero,
+              childrenPadding: const EdgeInsets.only(left: 20),
+              leading: const SizedBox.shrink(),
+              title: Row(
+                children: [
+                  const SizedBox(width: 4),
+                  Text(name),
+                ],
+              ),
+              children: _buildNodes(entity),
+            ),
+          ),
+        );
+      }
     }
+
+    return children;
   }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ListView(
+      children: _buildNodes(Directory(vaultPath)),
+    );
   }
 }

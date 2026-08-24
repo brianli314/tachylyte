@@ -1,6 +1,7 @@
 import 'package:file_tree_view/file_tree_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_resizable_container/flutter_resizable_container.dart';
+import 'package:tachylyte/components/file_explorer.dart';
 
 class NotesPage extends StatefulWidget {
   final String vaultPath;
@@ -20,25 +21,16 @@ class _NotesPageState extends State<NotesPage> {
           size: const ResizableSize.ratio(0.15),
           divider: ResizableDivider(
             onHoverEnter: () => setState(() => hovered = true),
+            onDragStart: () => setState(() => hovered = true),
+            onDragEnd: () => setState(() => hovered = true),
             onHoverExit: () => setState(() => hovered = false),
             thickness: 3,
             cursor: SystemMouseCursors.resizeColumn,
             color: hovered ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.surface
           ),
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            color: Theme.of(context).colorScheme.primaryContainer,
-            child: SingleChildScrollView(
-              child: DirectoryTreeViewer(
-                rootPath: widget.vaultPath,
-                enableCreateFileOption: true,
-                enableCreateFolderOption: true
-              ),
-            ),
-          ),
+          child: FileExplorer(vaultPath: widget.vaultPath)
         ),
-        ResizableChild(
-            child: Container(color: Theme.of(context).colorScheme.surface))
+        ResizableChild(child: Container())
       ]),
     );
   }
